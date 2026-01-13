@@ -22,6 +22,17 @@ class FitxersTest {
     }
 
     @Test
+    void testRetornaError() throws IOException {
+        Path fitxer = tempDir.resolve("test.txt");
+        Files.createFile(fitxer);
+        Fitxers f = new Fitxers(fitxer.toString());
+        assertThrowsExactly(IOException.class,()->{
+            f.propietariFitxer();
+        });
+    }
+
+
+    @Test
     void testCreaDirectori() throws IOException {
         Path nouDir = tempDir.resolve("meuDirectori");
         Fitxers f = new Fitxers(nouDir.toString());
@@ -30,7 +41,6 @@ class FitxersTest {
         assertTrue(Files.exists(nouDir));
         assertTrue(Files.isDirectory(nouDir));
     }
-
     @Test
     void testEliminarFitxerDirectori() throws IOException {
         Path fitxer = tempDir.resolve("eliminar.txt");
@@ -51,7 +61,7 @@ class FitxersTest {
         f.copiarFitxerDirectori(origen.toString(), desti.toString());
 
         assertTrue(Files.exists(desti));
-        assertEquals("Hola mon", Files.readString(desti));
+        assertEquals("Hola món", Files.readString(desti));
     }
 
     @Test

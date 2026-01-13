@@ -4,17 +4,22 @@ plugins {
 }
 
 group = 'lbaena'
-version = '1.0.0'
+version = '1.0.1'
 
 repositories {
     mavenCentral()
+}
+
+task sourcesJar(type:Jar){
+    from sourceSets.main.allJava
+    archiveClassifier= 'sources'
 }
 
 publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/lbaena/Programacio-AEA3")
+            url = uri("https://maven.pkg.github.com/lbaena/AEA3-Programacio")
             credentials {
                 username = project.findProperty("GITHUB_USER")
                 password = project.findProperty("GITHUB_TOKEN")
@@ -24,7 +29,8 @@ publishing {
     publications {
         gpr(MavenPublication) {
             from(components.java)
-            artifactId = "02-LlibreriaFitxers"
+            artifactId = "02-llibreria-fitxers"
+            version = "1.0.4"
 
             pom {
                 name = "02-LlibreriaFitxers"
