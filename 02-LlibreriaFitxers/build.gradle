@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'lbaena'
-version = '1.0.1'
+version = '1.0.5'
 
 repositories {
     mavenCentral()
@@ -30,7 +30,7 @@ publishing {
         gpr(MavenPublication) {
             from(components.java)
             artifactId = "02-llibreria-fitxers"
-            version = "1.0.4"
+            version = "1.0.5"
 
             pom {
                 name = "02-LlibreriaFitxers"

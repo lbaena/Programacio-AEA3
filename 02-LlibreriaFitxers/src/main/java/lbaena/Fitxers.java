@@ -31,9 +31,9 @@ public class Fitxers {
     // amb IO
 
     /**
-     * Comprova si un fitxer o directori existeix utilitzant la classe File.
+     * Comprova si un ruta o directori existeix utilitzant la classe File.
      *
-     * @return true si el fitxer o directori existeix, false en cas contrari.
+     * @return true si el ruta o directori existeix, false en cas contrari.
      */
     public boolean existeixIO() {
         boolean exists = false;
@@ -61,7 +61,7 @@ public class Fitxers {
     }
 
     /**
-     * Elimina un fitxer o directori utilitzant la classe File.
+     * Elimina un ruta o directori utilitzant la classe File.
      */
     public void eliminaFitxerDirectoriIO() {
         try {
@@ -75,10 +75,10 @@ public class Fitxers {
     }
 
     /**
-     * Copia un fitxer o directori d'una ubicació a una altra utilitzant la classe File.
+     * Copia un ruta o directori d'una ubicació a una altra utilitzant la classe File.
      *
-     * @param fitxerOrigen La ruta del fitxer o directori d'origen.
-     * @param fitxerDesti  La ruta del fitxer o directori de destí.
+     * @param fitxerOrigen La ruta del ruta o directori d'origen.
+     * @param fitxerDesti  La ruta del ruta o directori de destí.
      */
     public void moureFitxerDirectoriIO(String fitxerOrigen, String fitxerDesti) {
         try {
@@ -93,16 +93,15 @@ public class Fitxers {
     }
 
     /**
-     * Retorna les propietats d'un fitxer o directori utilitzant la classe File.
-     *
-     * @param fitxer La ruta del fitxer o directori.
+     * Retorna les propietats d'un ruta o directori utilitzant la classe File.
+
      * @return Una cadena amb les propietats separades per CSV.
      */
 
-    public String propietatsFitxerIO(String fitxer) {
+    public String propietatsFitxerIO() {
         String propietats = "";
         try {
-            File file = new File(fitxer);
+            File file = new File(ruta);
             if (file.exists()) {
                 propietats += file.canRead() ? "true;" : "false;";
                 propietats += file.canWrite() ? "true;" : "false;";
