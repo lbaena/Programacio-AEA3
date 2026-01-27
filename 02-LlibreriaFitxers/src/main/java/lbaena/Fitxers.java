@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.io.File;
 import java.util.List;
 
 
@@ -26,6 +27,99 @@ public class Fitxers {
     public String getRuta() {
         return ruta;
     }
+
+    // amb IO
+
+    /**
+     * Comprova si un fitxer o directori existeix utilitzant la classe File.
+     *
+     * @return true si el fitxer o directori existeix, false en cas contrari.
+     */
+    public boolean existeixIO() {
+        boolean exists = false;
+        try {
+            File file = new File(ruta);
+            exists = file.exists();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return exists;
+    }
+    /**
+     * Crea un directori utilitzant la classe File.
+     */
+
+    public void creaDirectoriIO() {
+        try {
+            File dir = new File(ruta);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Elimina un fitxer o directori utilitzant la classe File.
+     */
+    public void eliminaFitxerDirectoriIO() {
+        try {
+            File file = new File(ruta);
+            if (file.exists()) {
+                file.delete();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Copia un fitxer o directori d'una ubicació a una altra utilitzant la classe File.
+     *
+     * @param fitxerOrigen La ruta del fitxer o directori d'origen.
+     * @param fitxerDesti  La ruta del fitxer o directori de destí.
+     */
+    public void moureFitxerDirectoriIO(String fitxerOrigen, String fitxerDesti) {
+        try {
+            File origen = new File(fitxerOrigen);
+            File desti = new File(fitxerDesti);
+            if (origen.exists()) {
+                origen.renameTo(desti);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Retorna les propietats d'un fitxer o directori utilitzant la classe File.
+     *
+     * @param fitxer La ruta del fitxer o directori.
+     * @return Una cadena amb les propietats separades per CSV.
+     */
+
+    public String propietatsFitxerIO(String fitxer) {
+        String propietats = "";
+        try {
+            File file = new File(fitxer);
+            if (file.exists()) {
+                propietats += file.canRead() ? "true;" : "false;";
+                propietats += file.canWrite() ? "true;" : "false;";
+                propietats += file.canExecute() ? "true;" : "false;";
+                propietats += file.isDirectory() ? "true;" : "false;";
+                propietats += file.isFile() ? "true;" : "false;";
+                propietats += file.isHidden() ? "true" : "false";
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return propietats;
+    }
+
+
+
     public void setRuta(String ruta) {
         this.ruta = ruta;
     }
@@ -65,16 +159,16 @@ public class Fitxers {
     public String metadadesFitxer() throws IOException {
         Path path = Paths.get(ruta);
         String csv;
-        String headers = "tamany;data_creacio;data_modificacio;permisos";
+        String headers = "tamany;data_creacio;data_modificacio;permisos;";
 
         BasicFileAttributes attrs = Files.readAttributes(path, BasicFileAttributes.class);
 
-        csv = Files.size(path) + ";" +
+        csv = "\n" +  Files.size(path) + ";" +
               attrs.creationTime() + ";" +
               attrs.lastModifiedTime() + ";" +
               Files.getPosixFilePermissions(path).toString();
 
-        return csv;
+        return headers+csv;
     }
 
     public void escriuFitxerText(String text, boolean afegir) throws IOException {

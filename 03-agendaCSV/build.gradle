@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+}
+
+group = 'lbaena'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+
+    maven {
+        url 'https://gitlab.com/api/v4/projects/56672451/packages/maven'
+    }
+    maven {
+        url = uri("https://maven.pkg.github.com/lbaena/AEA3-Programacio")
+        credentials {
+            username = project.findProperty("PGITHUB_USER")
+            password = project.findProperty("PGITHUB_TOKEN")
+        }
+    }
+
+}
+
+dependencies {
+    implementation 'vicent.Bellver:missatges_i_alertes:4.0'
+    implementation 'lbaena:02-llibreria-fitxers:1.0.4'
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
