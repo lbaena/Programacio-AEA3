@@ -1,4 +1,6 @@
 import lbaena.Fitxers;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import static org.junit.jupiter.api.Assertions.*;
@@ -83,6 +85,7 @@ class FitxersTest {
         assertEquals("Linia 1", linies.get(0));
         assertEquals("Linia 2", linies.get(1));
     }
+
 
     @Test
     void testMetadadesFitxer() throws IOException {
